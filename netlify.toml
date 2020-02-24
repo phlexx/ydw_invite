@@ -1,0 +1,6 @@
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/ydw_glTF.gltf"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "model/gltf+json"

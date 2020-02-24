@@ -1,6 +1,13 @@
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
-  for = "/ydw_glTF.gltf"
+  for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+  for = "/*.gltf"
+    [headers.values]
     Content-Type = "model/gltf+json"
+    Access-Control-Allow-Origin = "*"
+  for = "/*.bin"
+    [headers.values]
+    Content-Type = "application/octet-stream"
+    Access-Control-Allow-Origin = "*"    

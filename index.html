@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fancypants Logo</title>
 </head>
+
 <body>
-    <ul>
-        <li>
-            <a href="intent://fancypants-logo.netlify.com/ydw.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;">
-                Show me the logo!
-            </a>
-        </li>                
-    </ul>
+
+    <p style="display: none;" id="unsupported">
+        Your Device is not supported.
+    </p>
+    <p style="display: none;" id="redirect">
+        You will be redirected to <a id="target" href="#">this link</a>
+    </p>
+    <noscript>
+        This page requires Javascript to work.
+    </noscript>
+
+    <script>
+        var redirectLinks = {
+            'android': "intent://fancypants-logo.netlify.com/ydw.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;",
+            'ios': "https://fancypants-logo.netlify.com/ydw.usdz"
+        }
+
+        function getMobileOperatingSystem() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // Windows Phone must come first because its UA also contains "Android"
+            if (/windows phone/i.test(userAgent)) {
+                return "winphone";
+            }
+            if (/android/i.test(userAgent)) {
+                return "android";
+            }
+            // iOS detection from: http://stackoverflow.com/a/9039885/177710
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return "ios";
+            }
+            return "unknown";
+        }
+
+        window.onload = function () {
+            var os = getMobileOperatingSystem();
+            var targetUri = redirectLinks[os];
+            if (targetUri) {
+                window.setTimeout(function(){
+                    document.getElementById("target").href = targetUri;
+                    document.getElementById("redirect").style.display = 'block';
+                }, 100);
+                window.location.replace(targetUri);
+            } else {
+                document.getElementById("unsupported").style.display = 'block';
+            }
+        }
+
+    </script>
 </body>
+
 </html>

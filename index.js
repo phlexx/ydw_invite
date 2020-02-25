@@ -4,8 +4,8 @@
     var redirectLinks = {
         'android': "intent://fancypants-logo.netlify.com/ydw.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;",
         'ios': "https://fancypants-logo.netlify.com/ydw.usdz"
-    }
-    var fallbackLink = "https://failblog.cheezburger.com/";
+    };
+    var fallbackLink = "https://www.daikin.com/";
 
     function getMobileOperatingSystem() {
         var userAgent = navigator.userAgent || navigator.vendor || window['opera'];
@@ -36,6 +36,6 @@
         }, 10);
         window.setTimeout(function () {
             window.location.replace(targetUri);
-        }, 200);
-    }
+        }, 150);
+    };
 })();
